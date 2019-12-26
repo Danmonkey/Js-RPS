@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+    game()
+
+
+    function game(){
+        let pWins = 0
+        let cWins = 0
+        let ties = 0
+        for(let i =0; i<5; i++){
+            let cSel = computerPlay()
+            let pSel = prompt("Choose rock, paper, or scissors")
+            pSel = pSel.toUpperCase()
+            while(pSel!="ROCK"&&pSel!="SCISSORS"&&pSel!="PAPER"){
+                pSel = prompt("Choose rock, paper, or scissors. Make sure it's valid.")
+                pSel= pSel.toUpperCase()
+            }
+            let catcher = RPS(pSel, cSel)
+            if(catcher==0){
+                ties++
+            }
+            else if(catcher==1){
+                pWins++
+            }
+            else if(catcher==2){
+                cWins++
+            }
+        }
+        if(cWins==pWins){
+                console.log("It was a tie!")
+            }
+            else if(cWins>pWins){
+                console.log("Computer won!")
+            }
+            else if (pWins>cWins){
+                console.log("Player won!")
+            }
+
+            console.log("Played 5 games. Player won " + pWins + " games. Computer won " + cWins + " games. There were " + ties + " ties")
+    }
+
+    function RPS(userSelection, computerSelection){
+        if(userSelection==computerSelection){
+            console.log("Tie")
+            return 0
+        }
+        else if(userSelection=="ROCK"){
+            if(computerSelection=="PAPER"){
+                console.log("Computer wins! Paper covers rock!")
+                return 2
+            }
+            else if(computerSelection=="SCISSORS"){
+                console.log("Player wins! Rock smashes scissors!")
+                return 1
+            }
+        }
+        else if(userSelection=="PAPER"){
+            if(computerSelection=="SCISSORS"){
+                console.log("Computer wins! Scissors cut paper!")
+                return 2
+            }
+            else if(computerSelection=="ROCK"){
+                console.log("Player wins! Paper covers rock!")
+                return 1
+            }
+        }
+        else if(userSelection=="SCISSORS"){
+            if(computerSelection=="ROCK"){
+                console.log("Computer wins! Rock smashes scissors!")
+                return 2
+            }
+            else if(computerSelection=="PAPER"){
+                console.log("Player wins! Scissors cut paper!")
+                return 1
+            }
+        }
+    }
+
+    function computerPlay(){
+        let cPlay = Math.floor(Math.random()*10%3)
+        if(cPlay==0){
+            return "ROCK"
+        }
+        else if(cPlay==1){
+            return "PAPER"
+        }
+        else{
+            return "SCISSORS"
+        }
+    }
+    </script>
+</body>
+</html>
